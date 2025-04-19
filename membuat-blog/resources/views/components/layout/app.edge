@@ -7,45 +7,36 @@
     <title>
       {{ title }}
     </title>
-
-   
   </head>
-  <body>
-   
-    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white text-sm py-3 dark:bg-neutral-800">
+  <body class="bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-500 text-white min-h-screen">
+
+    <!-- Header -->
+    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white text-sm py-3 dark:bg-neutral-800 shadow-md">
       <nav class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between">
-        <a class="flex-none font-semibold text-xl text-black focus:outline-hidden focus:opacity-80 dark:text-white" href="#" aria-label="Brand">Unugha</a>
+        <a class="flex-none font-semibold text-xl text-black focus:outline-none focus:opacity-80 dark:text-white hover:text-blue-300 transition duration-300 ease-in-out" href="#" aria-label="Brand">
+          Web Informatika
+        </a>
         <div class="flex flex-row items-center gap-5 mt-5 sm:justify-end sm:mt-0 sm:ps-5">
-          
           @eval(await auth.check())
-
-          @if(auth.isAutenticated)
-
-          <div>{{ auth.user.name}}</div>
-
-          <form action="/logout?_method=DELETE" method="post">
-
-            {{ csrfField() }}
-
-            <button class="text-gray-600 font-medium hover:text-gray-400">log out</button>
-
-          </form>
-
-          
-          <div>Log out</div>
-
+          @if(auth.isAuthenticated)
+            <div class="text-gray-800 dark:text-white font-medium">{{ auth.user.name }}</div>
+            <form action="/logout?_method=DELETE" method="post">
+              {{ csrfField() }}
+              <button class="text-gray-600 dark:text-white font-medium hover:text-red-500 transition">
+                Log out
+              </button>
+            </form>
           @else
-            <a href="/login" class="text-gray-600 font-medium hover:text-gray-400">Log in</a>
-
-            <a href="/register" class="text-gray-600 font-medium hover:text-gray-400">register</a>
+            <a href="/login" class="text-gray-600 dark:text-white font-medium hover:text-blue-300 transition">Log in</a>
+            <a href="/register" class="text-gray-600 dark:text-white font-medium hover:text-blue-300 transition">Register</a>
           @end
-
         </div>
       </nav>
-    </header>
+    </header>    
 
+    <!-- Main content -->
     <main class="grow">
-        {{{ await $slots.main()}}}
+      {{{ await $slots.main() }}}
     </main>
 
   </body>
